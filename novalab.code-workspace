@@ -1,0 +1,97 @@
+{
+  "folders": [
+    {
+      "name": "ROOT (DevOps & Docs)",
+      "path": "."
+    },
+    {
+      "name": "BACKEND (Django)",
+      "path": "backend"
+    },
+    {
+      "name": "FRONTEND (React)",
+      "path": "frontend"
+    }
+  ],
+  "settings": {
+    // --- GLOBAL EDITOR SETTINGS ---
+    "editor.formatOnSave": true,
+    "editor.rulers": [88, 120],
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/__pycache__": true,
+      "**/*.pyc": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/venv": true,
+      "**/dist": true,
+      "**/build": true
+    },
+
+    // --- BACKEND SPECIFIC (Python/Django) ---
+    // Points to the virtual environment inside the backend folder
+    "python.defaultInterpreterPath": "${workspaceFolder:BACKEND (Django)}/venv/Scripts/python.exe",
+    "python.analysis.extraPaths": ["${workspaceFolder:BACKEND (Django)}/apps"],
+    "python.formatting.provider": "black",
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.python"
+    },
+    "[django-html]": {
+      "editor.defaultFormatter": "batisteo.vscode-django"
+    },
+
+    // --- FRONTEND SPECIFIC (React/JS) ---
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      // Backend
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "batisteo.vscode-django",
+      "charliermarsh.ruff", // Fast Python Linter
+
+      // Frontend
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "dsznajder.es7-react-js-snippets",
+
+      // DevOps & Tools
+      "ms-azuretools.vscode-docker",
+      "tamasfe.even-better-toml", // For pyproject.toml
+      "redhat.vscode-yaml" // For Kubernetes/GitHub Actions
+    ]
+  },
+  "launch": {
+    "configurations": [
+      {
+        "name": "Django: Run Server",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder:BACKEND (Django)}/manage.py",
+        "args": ["runserver"],
+        "django": true,
+        "justMyCode": true
+      },
+      {
+        "name": "Frontend: Dev Server",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "dev"],
+        "cwd": "${workspaceFolder:FRONTEND (React)}",
+        "console": "integratedTerminal"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+web: gunicorn novalab.wsgi --log-file -

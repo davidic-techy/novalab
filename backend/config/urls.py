@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.http import JsonResponse # <--- Import this
+from django.http import JsonResponse
 
 # --- Simple "Health Check" View ---
 def api_root(request):
@@ -13,11 +13,19 @@ def api_root(request):
     })
 
 urlpatterns = [
-    # The Homepage (Fixes the 404)
+    # 1. The Homepage
     path('', api_root), 
 
+    # 2. Admin
     path('admin/', admin.site.urls),
+
+    # 3. Authentication 
+    
+    path('auth/', include('apps.accounts.urls')), 
+    # standard API path just in case:
     path('api/auth/', include('apps.accounts.urls')),
+
+    # 4. Other API Endpoints
     path('api/', include('apps.schools.urls')),
     path('api/learn/', include('apps.courses.urls')),
     path('api/labs/', include('apps.labs.urls')),
